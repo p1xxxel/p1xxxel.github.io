@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Just another writeup site</title>
+    <link>https://p1xxxel.github.io/posts/</link>
+    <description>Recent content in Posts on Just another writeup site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://p1xxxel.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://p1xxxel.github.io/posts/cap-writeup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://p1xxxel.github.io/posts/cap-writeup/</guid>
+      <description>Hackthebox Cap Operating System : GNU/Linux
+Difficulty : Easy
+Points : 20
+Creator : InfoSecJack
+Nmap Scan Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-09 20:53 IST PORT STATE SERVICE VERSION 21/tcp open ftp vsftpd 3.0.3 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0) 80/tcp open http gunicorn Security Snapshot Going to the security snapshot link in the right panel, we see that it redirects us to /data/1 and gives us a pcap file showing our connection to the server.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://p1xxxel.github.io/posts/explore-writeup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://p1xxxel.github.io/posts/explore-writeup/</guid>
+      <description>Hackthebox Explore Operating System : Android
+Difficulty : Easy
+Points : 20
+Creator : bertolis
+Nmap scan PORT STATE SERVICE VERSION 2222/tcp open ssh (protocol 2.0) 5555/tcp filtered freeciv 34399/tcp open unknown 42135/tcp open http ES File Explorer Name Response httpd 59777/tcp open http Bukkit JSONAPI httpd for Minecraft game server 3.6.0 or older |_http-title: Site doesn&amp;#39;t have a title (text/plain). ES File Explorer Vuln Searching for the port, we find that this port is due to a vulnerability in ES File Explorer can be exploited to get a shell.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://p1xxxel.github.io/posts/pit-writeup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://p1xxxel.github.io/posts/pit-writeup/</guid>
+      <description>Hackthebox Pit Operating System : Linux
+Difficulty : Medium
+Points : 30
+Creators : polarbearer and GibParadox
+Nmap Scan 22/tcp open ssh OpenSSH 8.0 (protocol 2.0) 80/tcp open http nginx 1.14.1 9090/tcp open ssl/zeus-admin? Nginx at port 80
+cockpit at port 9090
+dns found dms-pit.htb
+Visiting the page initially, it is 403 forbidden and searching directories does not return anything interesting. From the udp scan, we can see that there is a snmp port open.</description>
+    </item>
+    
+  </channel>
+</rss>
