@@ -37,16 +37,16 @@ Note : Bruteforce is not required.</p>
 <p><a href="https://storage.googleapis.com/noida_ctf/Web/baby_web.zip">Sauce</a></p>
 <h2 id="solution">Solution</h2>
 <p>Downloading the source and hosting it in a docker locally, we see that this website takes a parameter <code>chall_id</code></p>
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Baby%20Web/baby_web_site.png">
+<p><img src="/BSNoida_baby_web_site.png" alt="baby web site"></p>
 <p>Looking at the <code>index.php</code> file, we see that the following sql query is being executed.</p>
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Baby%20Web/sql_query.png">
+<p><img src="/BSNoida_sql_query.png" alt=""></p>
 <p>But if we try to put an alphabet in the parameter <code>chall_id</code>, we get an error.</p>
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Baby%20Web/baby_web_error.png" height="50%" width="50%">
+<p>![](/BSNoida_baby_web_error.png&quot; height=&ldquo;50%&rdquo; width=&ldquo;50%)</p>
 <p>Looking at <code>config/ctf.conf</code> in the source code, there is some regex that is used to prevent alphabets and white spaces.</p>
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Baby%20Web/baby_web_regex.png">
+<p><img src="/BSNoida_baby_web_regex.png" alt=""></p>
 <p>To bypass this we can use two parameters so that first one is processed by nginx and second one bypasses it.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">GET /?chall_id=1<span style="color:#960050;background-color:#1e0010">&amp;</span>chall_id=a
-</code></pre></div><img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Baby%20Web/nginx_bypass.png">
+</code></pre></div><p><img src="/BSNoida_nginx_bypass.png" alt=""></p>
 <p>And to bypass the white space restriction we can use comments.</p>
 <p>So instead of  <code>UNION SELECT</code>, we use <code>UNION/**/SELECT</code></p>
 <h3 id="listing-columns-and-tables">Listing columns and tables</h3>
@@ -54,10 +54,10 @@ Note : Bruteforce is not required.</p>
 <p>To list columns and tables, I used the following payload</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">GET /?chall_id=1<span style="color:#960050;background-color:#1e0010">&amp;</span>chall_id=1/**/UNION/**/SELECT/**/NULL,NULL,NULL,NULL,NULL,sql/**/FROM/**/sqlite_master
 </code></pre></div><p>Using this payload we get a table named <code>flagsss</code> and column named <code>flag</code></p>
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Baby%20Web/getting_tables_columns.png">
+<p><img src="/BSNoida_getting_tables_columns.png" alt=""></p>
 <p>Now, we can use the following query to retrieve the flag.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">GET /?chall_id=1<span style="color:#960050;background-color:#1e0010">&amp;</span>chall_id=1/**/UNION/**/SELECT/**/NULL,NULL,NULL,NULL,NULL,flag/**/FROM/**/flagsss
-</code></pre></div><img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Baby%20Web/flag_query.png">
+</code></pre></div><p><img src="/BSNoida_flag_query.png" alt=""></p>
 <p>So the flag is <code>BSNoida{4_v3ry_w4rm_w31c0m3_2_bs1d35_n01d4}</code></p>
 <h1 id="death-note">Death Note</h1>
 <h4 id="category--death-note">Category : Death Note</h4>
@@ -80,19 +80,19 @@ robots.txt              <span style="color:#f92672">[</span>Status: 200, Size: 1
 server-status           <span style="color:#f92672">[</span>Status: 403, Size: 277, Words: 20, Lines: 10<span style="color:#f92672">]</span>
 :: Progress: <span style="color:#f92672">[</span>4614/4614<span style="color:#f92672">]</span> :: Job <span style="color:#f92672">[</span>1/1<span style="color:#f92672">]</span> :: <span style="color:#ae81ff">148</span> req/sec :: Duration: <span style="color:#f92672">[</span>0:00:31<span style="color:#f92672">]</span> :: Errors: <span style="color:#ae81ff">0</span> ::
 </code></pre></div><p>At <code>ryuk.apples</code>, there is a ssh private key but it has a passphrase.</p>
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Death%20Note/ryuk_ssh_passphrase.png">
+<p><img src="/BSNoida_ryuk_ssh_passphrase.png" alt=""></p>
 <h4 id="cracking-ssh-key">Cracking ssh key</h4>
 <p>We can use <code>ssh2john</code> and then crack it with john using the given wordlist.
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Death%20Note/cracking_ssh_key.png"></p>
+<img src="/BSNoida_cracking_ssh_key.png" alt=""></p>
 <p>Now we can use this to login as <code>ryuk</code></p>
 <h4 id="cracking-shadow">Cracking shadow</h4>
 <p>We see in ryuk&rsquo;s home directory there is shadow and passwd.
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Death%20Note/ryuk_shadow.png"></p>
+<img src="/BSNoida_ryuk_shadow.png" alt=""></p>
 <p>Using them, we get the password of <code>light</code>
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Death%20Note/cracking_shadow.png"></p>
+<img src="/BSNoida_cracking_shadow.png" alt=""></p>
 <h4 id="getting-flag">Getting flag</h4>
 <p>Doing a <code>sudo -l</code>, we can run <code>cat</code> as root so we can just cat the flag at <code>/root/root.txt</code></p>
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Death%20Note/getting_flag.png">
+<p><img src="/BSNoida_getting_flag.png" alt=""></p>
 <p>So the flag is <code>BSNoida{Pr1vEsc_w4a_E4sy_P3a5y}</code></p>
 <h1 id="my-artwork">My Artwork</h1>
 <h4 id="category--misc">Category : Misc</h4>
@@ -105,9 +105,9 @@ Hope you can see my art before the turtle runs away!
 He&rsquo;s pretty fast tbh!
 PS: Put the flag in BSNoida{} wrapper.</p>
 <p>Attachment : art.TURTLE</p>
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/My%20Artwork/chal_commands.png">
+<p><img src="/BSNoida_chal_commands.png" alt=""></p>
 <p>Looking at the commands and searching them I find that they are syntax of MSW Logo so I download MSW Logo and execute the repeat commands one by one.</p>
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/My%20Artwork/exec_logo_commands.png">
+<p><img src="/BSNoida_exec_logo_commands.png" alt=""></p>
 <p>Doing so we get</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">CODE_IS_BEAUTY_BEAUTY_IS_CODE
 </code></pre></div><p>So our flag becomes</p>
@@ -122,12 +122,12 @@ PS: Put the flag in BSNoida{} wrapper.</p>
 <h2 id="solution-2">Solution</h2>
 <p>Using the command given in the challenge we get lyrics of Rickroll.</p>
 <p>Opening the exe in ghidra, we see that it XORs each character and then compares it.</p>
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Sanity/ghidra_decompilation.png">
+<p><img src="/BSNoida_ghidra_decompilation.png" alt=""></p>
 <p>Opening the binary in Ollydbg and setting the breakpoint at the <code>CMP</code> instruction using <code>F2</code>.</p>
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Sanity/ollydbg_breakpoint.png">
+<p><img src="/BSNoida_ollydbg_breakpoint.png" alt=""></p>
 <p>The flag length is 33 as this was the length of the string getting XORed with input(from ghidra).</p>
 <p>We send 33 A&rsquo;s and then look at the CMP instruction.</p>
-<img src="https://github.com/p1xxxel/ctf-writeups/blob/main/2021/BSides%20Noida/Sanity/CMP_instruction.png">
+<p><img src="/BSNoida_CMP_instruction.png" alt=""></p>
 <p>So A gets converted into H and then is compared to K. So we can just XOR A with H to get the key and then XOR the key with K to get the flag.</p>
 <p>So I note down the encrypted key and the encrypted string and make the following solve script.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> xor
